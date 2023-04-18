@@ -46,6 +46,10 @@ carryOn = True
 #clock will control refresh rate, to prevent the screen updating itself too fast and crashing
 clock = pygame.time.Clock()
 
+#Initialising scores to 0
+scoreA = 0
+scoreB = 0
+
 #this loop detects if the user wants to close the game
 while carryOn:
     #the event is for anything user did
@@ -68,8 +72,10 @@ while carryOn:
     all_sprites_lists.update()
     
     if ball.rect.x>=690:
+        scoreA+=1
         ball.velocity[0] = -ball.velocity[0]
     if ball.rect.x<=0:
+        scoreB+=1
         ball.velocity[0] -ball.velocity[0]
     if ball.rect.y>490:
         ball.velocity[1] = -ball.velocity[1]
@@ -86,6 +92,12 @@ while carryOn:
     #makes the net
     pygame.draw.line(screen, WHITE, [349, 0], [349, 500], 5)
 
+
+    font = pygame.font.Font(None, 74)
+    text = font.render(str(scoreA), 1, WHITE)
+    screen.blit(text, (250,10))
+    text = font.render(str(scoreB), 1, WHITE)
+    screen.blit(text, (420,10))
     #updates screen with net
     pygame.display.flip()
 
