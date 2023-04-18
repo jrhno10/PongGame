@@ -58,6 +58,13 @@ while carryOn:
         if event.type ==pygame.QUIT:
             #by setting loop to false this closes the screen
             carryOn = False
+        
+        #Allows the user to press space and pause game by using an infinite loop
+        if event.type ==pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            while True:
+                event == pygame.event.wait()
+                if event.type == pygame.KEYDOWN and event.key ==pygame.K_SPACE:
+                    break
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
@@ -92,17 +99,18 @@ while carryOn:
     #makes the net
     pygame.draw.line(screen, WHITE, [349, 0], [349, 500], 5)
 
-
+    #Displays the scores
     font = pygame.font.Font(None, 74)
     text = font.render(str(scoreA), 1, WHITE)
     screen.blit(text, (250,10))
     text = font.render(str(scoreB), 1, WHITE)
     screen.blit(text, (420,10))
+    
     #updates screen with net
     pygame.display.flip()
 
     #sets the game to 60 frames per second
     clock.tick(60)
 
-#upon exiting the program, we close the game
+#upon exiting the program loop, this will close the game
 pygame.quit()
